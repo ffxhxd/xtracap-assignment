@@ -42,7 +42,7 @@ To run this project locally, follow these steps:
 
 ## Deployment
 
-This application is deployed on [Netlify]. You can access the deployed application at [deployed URL].
+[Live Link](https://66413c99e261e5263676a99f--cool-bombolone-34cd33.netlify.app/)
 
 ## Authors
 [Fahad](https://github.com/ffxhxd)
