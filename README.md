@@ -1,71 +1,49 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Photo Explorer
 
-## Available Scripts
+Photo Explorer is a React application that utilizes the Unsplash API to display and search for photos. It features a responsive design, infinite scrolling, and an autocomplete search bar with saved suggestions.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Default Image Display**: On initial load, the application displays a set of random photos fetched from the Unsplash API.
+- **Search Functionality**: Users can search for photos using a fixed search bar at the top of the page. As users type, search results are displayed in real time.
+- **Infinite Scroll**: The application loads more images as the user scrolls down, providing a seamless browsing experience.
+- **Search Suggestions**: User search queries are saved locally, and previous searches are suggested as tags near the search bar when the user interacts with it again.
+- **Photo Preview Modal**: Clicking on a photo opens it in a modal, allowing for a closer view.
+- **Responsive Design**: The application is fully responsive, ensuring a consistent experience across different device sizes.
+- **Loaders and Placeholders**: Appropriate loading indicators are shown while photos are being fetched or loaded.
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ReactJS
+- Material-UI (MUI) for the user interface components
+- Unsplash API for fetching photo data
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Local Setup
 
-### `npm test`
+To run this project locally, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
+   ```
+   git clone https://github.com/ffxhxd/xtracap-assignment.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd xtracap-assignment
+   ```
+3. Install the dependencies:
+   ```
+   npm install
+   ```
+4. Start the development server:
+   ```
+   npm start
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This application is deployed on [Netlify]. You can access the deployed application at [deployed URL].
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Authors
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# xtracap-assignment
+This project is open source and available under the [MIT License](LICENSE).

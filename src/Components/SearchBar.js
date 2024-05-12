@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { TextField } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { TextField } from '@mui/material';
 
+// SearchBar component that handles search input, suggestions, and local storage for search history
 const SearchBar = ({ onSubmit }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [timer, setTimer] = useState(null);
-  const [isFocused, setIsFocused] = useState(false); // State to track focus
+  const [isFocused, setIsFocused] = useState(false); // Tracks if the input field is focused
 
-  // Load suggestions from local storage when the component mounts
+  // Load suggestions from local storage on component mount
   useEffect(() => {
-    const loadedSuggestions = JSON.parse(localStorage.getItem("searchSuggestions")) || [];
+    const loadedSuggestions = JSON.parse(localStorage.getItem('searchSuggestions')) || [];
     setSuggestions(loadedSuggestions);
   }, []);
 
+  // Handles input changes with debounce to limit intensive operations like saving to local storage
   const handleChange = (e) => {
     const { value } = e.target;
     setInputValue(value);
@@ -20,48 +22,51 @@ const SearchBar = ({ onSubmit }) => {
     debounceSaveToLocalStorage(value);
   };
 
+  // Debounces saving the search query to local storage after every 2 seconds we can adjust the timing as per requirment
   const debounceSaveToLocalStorage = (query) => {
     if (timer) {
       clearTimeout(timer);
     }
     const newTimer = setTimeout(() => {
       saveSearchQuery(query);
-    }, 2000); 
+    }, 2000);
     setTimer(newTimer);
   };
 
+  // Saves the search query to local storage and updates suggestions
   const saveSearchQuery = (query) => {
     if (query.trim() !== "") {
       let updatedSuggestions = suggestions.filter(item => item !== query);
       updatedSuggestions = [query, ...updatedSuggestions].slice(0, 6);
       setSuggestions(updatedSuggestions);
-      localStorage.setItem("searchSuggestions", JSON.stringify(updatedSuggestions));
+      localStorage.setItem('searchSuggestions', JSON.stringify(updatedSuggestions));
     }
   };
 
-  // Function to handle the delay of hiding suggestions
+  // Focus handler to show suggestions
   const handleFocus = () => {
     setIsFocused(true);
   };
 
+  // Blur handler to hide suggestions after a short delay so that we can click the button we can also adjust this for btter UX
   const handleBlur = () => {
-    // Delay hiding the suggestions box to allow for suggestion click to be processed
     setTimeout(() => {
       setIsFocused(false);
-    }, 200); // Delay can be adjusted based on the responsiveness of your UI
+    }, 200);
   };
 
+  // Fills the input when a suggestion is clicked and submits the query
   const fillInputWithSuggestion = (suggestion) => {
     setInputValue(suggestion);
     onSubmit(suggestion);
     setIsFocused(false);
   };
 
+  // Clears search suggestions from local storage
   const clearLocalStorage = () => {
-    localStorage.removeItem("searchSuggestions");
+    localStorage.removeItem('searchSuggestions');
     setSuggestions([]);
   };
-
 
   return (
     <div className="relative">
