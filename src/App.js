@@ -1,6 +1,10 @@
+import PhotoList from "./Components/PhotoList";
+
 function App() {
   return (
-    <div>app</div>
+    <div>
+  <PhotoList/>
+    </div>
   );
 }
 
