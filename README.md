@@ -2,7 +2,7 @@
 # Photo Explorer
 
 Photo Explorer is a React application that utilizes the Unsplash API to display and search for photos. It features a responsive design, infinite scrolling, and an autocomplete search bar with saved suggestions.
--Note: I was Facing error in creating an account on "flickr" so I have used Unsplash APIs for the development of this project. 
+# Note: I was Facing error in creating an account on "flickr" so I have used Unsplash APIs for the development of this project. 
 
 ## Features
 
