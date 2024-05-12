@@ -41,6 +41,9 @@ To run this project locally, follow these steps:
    ```
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+## Caution
+- As I am using free version of Unsplash APIs it only allows 50 api calls per hour [403 status error will be shown in UI]), in that case, for testing purposes, after exhausting that limit you can simply change the API Secret key in constants.js to this : 'XSpfZCMwVAh_3E_Wnpc-WgNTXXPpG9aJYC-E-jh8s4Y' , as this is a another project in created on Unsplash this will allow 50 more calls.
+
 ## Deployment
 
 [Live Link](https://66413c99e261e5263676a99f--cool-bombolone-34cd33.netlify.app/)
