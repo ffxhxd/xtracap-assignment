@@ -45,5 +45,5 @@ To run this project locally, follow these steps:
 This application is deployed on [Netlify]. You can access the deployed application at [deployed URL].
 
 ## Authors
+[Fahad](https://github.com/ffxhxd)
 
-This project is open source and available under the [MIT License](LICENSE).
