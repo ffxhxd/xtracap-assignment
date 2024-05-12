@@ -1,5 +1,7 @@
 import React from "react";
 import PhotoCard from "./PhotoCard";
+ import { Grid } from "@mui/material";
+import ScrollToTop from "./ScrollToTop";
 
 const PhotoGrid = ({ photos }) => {
 
@@ -8,12 +10,16 @@ const PhotoGrid = ({ photos }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-    {photos.map((photo) => (
-      <PhotoCard key={photo.id} photo={photo} />
-    ))}
-  </div>
-  
+  <>
+   <ScrollToTop />
+    <Grid container spacing={2}>
+      {photos.map((photo) => (
+        <Grid item xs={12} sm={6} md={4} key={photo.id}>
+          <PhotoCard photo={photo} />
+        </Grid>
+      ))}
+    </Grid>
+  </>
   );
 };
 

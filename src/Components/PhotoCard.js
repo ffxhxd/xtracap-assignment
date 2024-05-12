@@ -16,47 +16,15 @@ const PhotoCard = ({ photo }) => {
           height="140"
           image={photo.urls.regular}
           alt={photo.alt_description}
-          sx={{
-            height: '300px',
-            width: '250px'
-          }}
+          sx={{height: '300px', objectFit: 'cover'}}
         />
       </Card>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: 'none',
-          backgroundColor: 'transparent'
-        }}
-      >
-        <Box sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: {
-            xs: '70%',
-            sm: '80%',
-            md: '70%',
-            lg: '50%',
-            xl: '50%'
-          },
-          bgcolor: 'background.paper',
-          boxShadow: 24,
-          p: 4,
-        }}>
+      
+      <Modal open={open} onClose={handleClose} closeAfterTransition sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'none',backgroundColor: 'transparent'}}>
+        <Box sx={{position: 'absolute',top: '50%',left: '50%',transform: 'translate(-50%, -50%)', width: {xs: '70%',sm: '80%',md: '70%',lg: '50%',xl: '50%'}, bgcolor: 'background.paper', boxShadow: 24, p: 4,}}>
           <Card>
             <CardMedia
-              component="img"
-              sx={{ height: '300px', objectFit: 'cover' }}
-              image={photo.urls.regular}
-              alt={photo.alt_description}
+              component="img" sx={{ height: '300px', objectFit: 'cover' }} image={photo.urls.regular} alt={photo.alt_description}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
