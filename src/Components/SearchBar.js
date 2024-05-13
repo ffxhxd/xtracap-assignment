@@ -24,7 +24,12 @@ const SearchBar = ({ onSubmit }) => {
   // Function to handle the submission of the search query
   const handleSearchSubmit = (query) => {
     onSubmit(query);
-    window.scrollTo({ top: 0, behavior: "smooth" });// Scroll to the top of the page on new search
+    // Scroll to the top of the page on new search used here 
+    // because when we have scrolled to very bottom it will
+    // change the behaviour of cards and do a lot of network calls  
+    // to stop that bug from occuring I will scroll to top 
+    //when ever there is a new QUERY by the user
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Debounces saving the search query to local storage after every 2 seconds we can adjust the timing as per requirement
