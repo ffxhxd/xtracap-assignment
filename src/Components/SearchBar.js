@@ -44,13 +44,13 @@ const SearchBar = ({ onSubmit }) => {
     setTimer(newTimer);
   };
 
-  // Saves the search query to local storage and updates suggestions
+  // Saves the search query to local storage and updates suggestions [latest 6 suggestion will be shown to the user]
   const saveSearchUseQuery = (query) => {
     if (query.trim() !== "") {
       let updatedSuggestions = suggestions.filter(item => item !== query);
       updatedSuggestions = [query, ...updatedSuggestions].slice(0, 6);
       setSuggestions(updatedSuggestions);
-      localStorage.setItem('searchSuggestions', JSON.stringify(updatedSuggestions)); // Corrected the typo here
+      localStorage.setItem('searchSuggestions', JSON.stringify(updatedSuggestions)); 
     }
   };
 
