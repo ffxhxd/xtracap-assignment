@@ -18,28 +18,34 @@ const SearchBar = ({ onSubmit }) => {
   const handleChange = (e) => {
     const { value } = e.target;
     setInputValue(value);
-    onSubmit(value);
     debounceSaveToLocalStorage(value);
   };
 
-  // Debounces saving the search query to local storage after every 2 seconds we can adjust the timing as per requirment
+  // Function to handle the submission of the search query
+  const handleSearchSubmit = (query) => {
+    onSubmit(query);
+    window.scrollTo({ top: 0, behavior: "smooth" });// Scroll to the top of the page on new search
+  };
+
+  // Debounces saving the search query to local storage after every 2 seconds we can adjust the timing as per requirement
   const debounceSaveToLocalStorage = (query) => {
     if (timer) {
       clearTimeout(timer);
     }
     const newTimer = setTimeout(() => {
-      saveSearchQuery(query);
-    }, 2000);
+      saveSearchUseQuery(query); 
+      handleSearchSubmit(query);
+    }, 1000);
     setTimer(newTimer);
   };
 
   // Saves the search query to local storage and updates suggestions
-  const saveSearchQuery = (query) => {
+  const saveSearchUseQuery = (query) => {
     if (query.trim() !== "") {
       let updatedSuggestions = suggestions.filter(item => item !== query);
       updatedSuggestions = [query, ...updatedSuggestions].slice(0, 6);
       setSuggestions(updatedSuggestions);
-      localStorage.setItem('searchSuggestions', JSON.stringify(updatedSuggestions));
+      localStorage.setItem('searchSuggestions', JSON.stringify(updatedSuggestions)); // Corrected the typo here
     }
   };
 
@@ -48,7 +54,7 @@ const SearchBar = ({ onSubmit }) => {
     setIsFocused(true);
   };
 
-  // Blur handler to hide suggestions after a short delay so that we can click the button we can also adjust this for btter UX
+  // Blur handler to hide suggestions after a short delay so that we can click the button we can also adjust this for better UX
   const handleBlur = () => {
     setTimeout(() => {
       setIsFocused(false);
@@ -58,7 +64,7 @@ const SearchBar = ({ onSubmit }) => {
   // Fills the input when a suggestion is clicked and submits the query
   const fillInputWithSuggestion = (suggestion) => {
     setInputValue(suggestion);
-    onSubmit(suggestion);
+    handleSearchSubmit(suggestion);
     setIsFocused(false);
   };
 

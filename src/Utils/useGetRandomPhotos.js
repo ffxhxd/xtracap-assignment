@@ -4,7 +4,7 @@ import { UNSPLASH_API_URL, SECRET_KEY } from "./Constants";
 const useGetRandomPhotos = () => {
   const [photoData, setPhotoData] = useState(null);
 
-  // Function to fetch random photos from Unsplash API
+  // custom hook to fetch random photos from Unsplash API
   const fetchRandomPhotos = async () => {
     const data = await fetch(
       `${UNSPLASH_API_URL}photos/random?count=12&client_id=${SECRET_KEY}`
