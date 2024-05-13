@@ -46,7 +46,7 @@ To run this project locally, follow these steps:
 
 ## Deployment
 
-[Live Link](https://66413c99e261e5263676a99f--cool-bombolone-34cd33.netlify.app/)
+[Live Link](https://664159d7bad0a33564052fa6--rainbow-mooncake-bd9bb9.netlify.app/)
 
 ## Authors
 [Fahad](https://github.com/ffxhxd)
