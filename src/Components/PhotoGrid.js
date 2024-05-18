@@ -14,8 +14,8 @@ const PhotoGrid = ({ photos }) => {
     <>
       <ScrollToTop /> {/* Component that enables a scroll to top functionality */}
       <Grid container spacing={2}> 
-        {photos.map((photo) => (
-          <Grid item xs={12} sm={6} md={4} key={photo.id}>
+        {photos.map((photo, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
             <PhotoCard photo={photo} /> 
           </Grid>
         ))}

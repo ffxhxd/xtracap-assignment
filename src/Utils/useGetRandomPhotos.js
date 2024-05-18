@@ -1,31 +1,43 @@
 import { useEffect, useState } from "react";
 import { UNSPLASH_API_URL, SECRET_KEY } from "./Constants";
 
-const useGetRandomPhotos = () => {
-  const [photoData, setPhotoData] = useState(null);
+const useGetRandomPhotos = (page) => {
+  const [photoData, setPhotoData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // custom hook to fetch random photos from Unsplash API
   const fetchRandomPhotos = async () => {
-    const data = await fetch(
-      `${UNSPLASH_API_URL}photos/random?count=12&client_id=${SECRET_KEY}`
+    const response = await fetch(
+      `${UNSPLASH_API_URL}/photos/random?&page=${page}&count=9&client_id=${SECRET_KEY}`
     );
-    if (!data.ok) {
-      throw new Error(`Failed to fetch: ${data.status} ${data.statusText}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
     }
-    const json = await data.json();
-    return json;
+    const json = await response.json();
+    // console.log(page);
+    return json.results;
   };
 
   useEffect(() => {
-    // Fetch random photos when the component mounts
     const getRandomPhotos = async () => {
-      const photos = await fetchRandomPhotos();
-      setPhotoData(photos.results);
+      setLoading(true);
+      try {
+        const photos = await fetchRandomPhotos();
+        if (Array.isArray(photos)) {
+          setPhotoData((prevPhotos) => [...prevPhotos, ...photos]);
+        } else {
+          console.error("Unexpected response format:", photos);
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
     };
     getRandomPhotos();
-  }, []);
+  }, [page]);
 
-  return photoData;
+  return { photoData, loading, error };
 };
 
 export default useGetRandomPhotos;

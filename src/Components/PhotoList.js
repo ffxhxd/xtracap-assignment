@@ -3,65 +3,54 @@ import { Typography } from '@mui/material';
 import PhotoGrid from './PhotoGrid';
 import useSearchPhotos from '../Utils/useSearchPhotos';
 import SearchBar from './SearchBar';
-import Loader from './Loader';
+import ShimmerPhotoGrid from './ShimmerPhotoGrid';
 import useGetRandomPhotos from '../Utils/useGetRandomPhotos';
 
-// PhotoList component handles the display of photos based on user queries or random selections.
-// It features an infinite scrolling mechanism, a sticky search bar at the top, and displays loading states and errors.
 const PhotoList = () => {
-  const [query, setQuery] = useState(""); // State for the search query
-  const [page, setPage] = useState(1); // State for pagination
-  const { photoData, loading, error } = useSearchPhotos(query, page); // Custom hook to fetch photos based on search query and page
-  const randomImages = useGetRandomPhotos(); // Custom hook to fetch random photos
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  
+  const { photoData: searchPhotoData, loading: searchLoading, error: searchError } = useSearchPhotos(query, page);
+  const { photoData: randomPhotoData, loading: randomLoading, error: randomError } = useGetRandomPhotos(page);
 
-  // Function to handle search input and reset pagination
   const handleSearch = (searchQuery) => {
     setQuery(searchQuery);
-    setPage(1);
+    setPage(1); // Reset pagination on new search
   };
 
-  // Function to handle infinite scroll
   const handleInfiniteScroll = () => {
-    try {
-      if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-        setPage(prev => prev + 1);
-      }
-    } catch (error) {
-      console.error('Error handling infinite scroll:', error);
+    if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+      setPage(prev => prev + 1);
     }
   };
 
-  // Attach scroll event listener for infinite scroll
   useEffect(() => {
     window.addEventListener('scroll', handleInfiniteScroll);
-    return () => window.removeEventListener('scroll', handleInfiniteScroll); // Cleanup on component unmount
-  }, []);
+    return () => window.removeEventListener('scroll', handleInfiniteScroll);
+  }, [page]);
 
   return (
     <>
-      {/* Sticky search bar at the top */}
-      <div className="flex bg-black flex-col items-center justify-center gap-1 pt-1 pb-2 sticky top-0">
+      <div className="sticky top-0 bg-black flex flex-col items-center justify-center gap-1 pt-1 pb-2">
         <Typography sx={{ color: '#fff' }} variant="h6">
           Search Photos
         </Typography>
         <SearchBar onSubmit={handleSearch} />
       </div>
 
-      {/* Error handling section */}
-      {error && <p>Error fetching photos: {error.message}</p>}
+      {searchError && <p>Error fetching photos: {searchError.message}</p>}
+      {randomError && <p>Error fetching random photos: {randomError.message}</p>}
 
-      {/* Photo display section */}
       <div className="flex items-center justify-start flex-col m-5">
         {query ? (
-          // Display search results if there's a query
           <>
-            {photoData && <PhotoGrid photos={photoData.results} />}
-            {loading && <Loader />}
+            {searchPhotoData ? <PhotoGrid photos={searchPhotoData.results} /> : <ShimmerPhotoGrid />} 
+            {searchLoading && <ShimmerPhotoGrid />} 
           </>
         ) : (
-          // Display random images if no query is made
           <>
-            {randomImages ? <PhotoGrid photos={randomImages} /> : <Loader />}
+            {randomPhotoData ? <PhotoGrid photos={randomPhotoData} /> : <ShimmerPhotoGrid />} 
+            {randomLoading && <ShimmerPhotoGrid />}
           </>
         )}
       </div>
